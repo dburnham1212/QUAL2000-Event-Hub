@@ -13,12 +13,13 @@ test('Testing "Back to Dashboard" button while logged in as admin', async ({
 test("Testing if you can create new event logged in as admin", async ({
     page,
 }) => {
+    const testEventName = `Fun Function ${Date.now()}`
     await loginAsAdmin(page);
     await page.goto("/admin/events/new");
     await page.getByRole("textbox", { name: "Event Title" }).click();
     await page
         .getByRole("textbox", { name: "Event Title" })
-        .fill(`Fun Function ${Date.now()}`);
+        .fill(testEventName);
     await page.getByRole("textbox", { name: "Event Date" }).fill("2026-04-29");
     await page.getByRole("textbox", { name: "Location" }).click();
     await page.getByRole("textbox", { name: "Location" }).fill("Kingston, CA");
@@ -39,6 +40,11 @@ test("Testing if you can create new event logged in as admin", async ({
     await page.getByRole("button", { name: "Create Event" }).click();
     await expect(page.locator("section")).toContainText(
         "Event created successfully.",
+    );
+    await expect(page.locator('tr', { hasText: testEventName })).toBeVisible();
+    await page.locator('tr', { hasText: testEventName }).getByRole('button', { name: 'Delete' }).click();
+    await expect(page.locator("section")).toContainText(
+        "Event deleted successfully.",
     );
 });
 

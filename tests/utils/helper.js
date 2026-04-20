@@ -37,7 +37,7 @@ const loginAsSecondaryUser = async (page) => {
 };
 
 const createTestEvent = async (page) => {
-    const newEventName = `Test ${Date.now()}`;
+    const newEventName = `Test ${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     await page.goto("/admin/events/new");
     await page.getByRole("link", { name: "Add Event" }).click();
     await page.getByRole("textbox", { name: "Event Title" }).click();

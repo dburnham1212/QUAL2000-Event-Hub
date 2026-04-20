@@ -32,4 +32,5 @@ test('Testing if clicking "See All Events" button works at bottom of homepage', 
 test('Tsting if clicking "Log In To Manage Events" button works at bottom of homepage', async ({ page }) => {
   await page.getByRole('link', { name: 'Log In To Manage Events' }).click();
   await expect(page.getByRole('heading')).toContainText('Log in to manage your events.');
+
 });

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginAsAdmin } from './utils/helper';
+import { loginAsAdmin, createTestEvent} from './utils/helper';
 
 test.beforeEach(async ({ page }) => {
   await loginAsAdmin(page);  
@@ -18,11 +18,15 @@ test('Clicking on edit event takes you to the update event form ', async ({ page
   await expect(page.locator('section')).toContainText('Update event');
 });
 
-// test('Clicking on delete event successfully deletes the event', async ({ page }) => {
-//   await page.goto('http://localhost:3000/admin/events');
-//   await expect(
-//   page.locator('tr', { hasText: 'Kingston Spring Music' })
-// ).toBeVisible();
-//   await page.locator('tr', { hasText: 'Kingston Spring Music' }).getByRole('button', { name: 'Delete' }).click();
-//   await expect(page.locator('section')).toContainText('Event deleted successfully.');
-// });
+
+test('Clicking on delete event successfully deletes the event', async ({
+    page,
+}) => {
+    const testName = await createTestEvent(page);
+    await loginAsAdmin(page); 
+    await expect(page.locator('tr', { hasText: testName })).toBeVisible();
+    await page.locator('tr', { hasText: testName }).getByRole('button', { name: 'Delete' }).click();
+    await expect(page.locator("section")).toContainText(
+        "Event deleted successfully.",
+    );
+});
