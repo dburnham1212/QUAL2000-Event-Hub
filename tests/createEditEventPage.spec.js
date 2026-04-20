@@ -105,6 +105,11 @@ test.fixme("BUG: Testing if you can create a duplicate event logged in as admin"
     await expect(page.locator("section")).toContainText(
         "Event not created successfully.",
     );
+    await expect(page.locator('tr', { hasText: testEventName })).toBeVisible();
+    await page.locator('tr', { hasText: testEventName }).getByRole('button', { name: 'Delete' }).click();
+    await expect(page.locator("section")).toContainText(
+        "Event deleted successfully.",
+    );
 });
 
 test.fixme("BUG: Testing if you can create an event with no input", async ({ page }) => {
