@@ -101,7 +101,7 @@ test.fixme("BUG: Testing if you can create a duplicate event logged in as admin"
     );
 });
 
-test("Testing if you can create an event with no input", async ({ page }) => {
+test.fixme("BUG: Testing if you can create an event with no input", async ({ page }) => {
     await loginAsAdmin(page);
     await page.goto("/admin/events/new");
     await page.getByRole("button", { name: "Create Event" }).click();

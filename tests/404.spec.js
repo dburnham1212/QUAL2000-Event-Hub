@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { getBaseURL } from './utils/helper';
 
 // ============ 404 testing ============
 test('Testing if typing an invalid location returns the 404 page', async ({ page }) => {
