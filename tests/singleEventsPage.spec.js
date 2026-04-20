@@ -87,9 +87,15 @@ test("Testing to see if you can register to a full event", async ({ page }) => {
     await page.getByRole("spinbutton", { name: "Seat Count" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).fill("10");
     await page.getByRole("button", { name: "Add To My Calendar" }).click();
+    await expect(page.locator("body")).toContainText(
+        "Registration created successfully.",
+    );
 
     // Logout as user 1
     await page.getByRole("button", { name: "Log Out" }).click();
+    await expect(page.locator("body")).toContainText(
+        "You have been logged out.",
+    );
 
     // Log in as secondary user
     await loginAsSecondaryUser(page);
