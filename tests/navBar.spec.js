@@ -46,7 +46,7 @@ test('Testing if clicking on the "Admin Dashboard" button takes you to the admin
 
 
 // ============ Nav Bar Testing - User Logged In ============
-test('Testing if "Log Out" button work from navbar after successful sign in', async ({ page }) => {
+test('Testing if "Log Out" button works from navbar after successful sign in', async ({ page }) => {
   await loginAsUser(page);
   await page.getByRole('button', { name: 'Log Out' }).click();
   await expect(page.locator('section')).toContainText('You have been logged out.');
