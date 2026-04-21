@@ -82,9 +82,8 @@ test("Testing to see if you can register to a full event", async ({ page }) => {
 
     // Register for event as user one
     await page.goto("/events");
-    await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
-        .click();
+    await expect(page).toHaveURL(/events/);
+    await page.getByRole('link', { name: testName }).click();
     await page.getByRole("link", { name: "Register For This Event" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).fill("10");
@@ -104,9 +103,7 @@ test("Testing to see if you can register to a full event", async ({ page }) => {
 
     // Trying to register for full event
     await page.goto("/events");
-    await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
-        .click();
+    await page.getByRole('link', { name: testName }).click();
     await expect(page.getByRole("complementary")).toContainText(
         "This event is full",
     );
@@ -114,7 +111,7 @@ test("Testing to see if you can register to a full event", async ({ page }) => {
     // Log back in as admin and delete the event
     await loginAsAdmin(page);
     await page
-        .getByRole("row", { name: `${testName} April 30,` })
+        .getByRole("row", { name: testName })
         .getByRole("button")
         .click();
     await expect(page.locator("section")).toContainText(

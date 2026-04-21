@@ -15,7 +15,7 @@ test('Testing if clicking "Back To My Events" button returns you to event page s
     // Check if registration works
     await page.goto("/events");
     await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
+        .getByRole("link", { name: testName })
         .click();
     await page.getByRole("link", { name: "Register For This Event" }).click();
     await page.getByRole("button", { name: "Add To My Calendar" }).click();
@@ -28,13 +28,14 @@ test('Testing if clicking "Back To My Events" button returns you to event page s
         .locator("tr", { hasText: testName })
         .getByRole("link", { name: "Edit Seats" })
         .click();
+    await expect(page).toHaveURL(/events\/registrations/);
     await page.getByRole("link", { name: "Back To My Events" }).click();
     await expect(page.locator("body")).toContainText("My saved events");
 
     // Log back in as admin and delete the event
     await loginAsAdmin(page);
     await page
-        .getByRole("row", { name: `${testName} April 30,` })
+        .getByRole("row", { name: testName })
         .getByRole("button")
         .click();
     await expect(page.locator("section")).toContainText(
@@ -56,7 +57,7 @@ test("Testing if you can update seats to a negative value", async ({
     // Check if registration works
     await page.goto("/events");
     await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
+        .getByRole("link", { name: testName })
         .click();
     await page.getByRole("link", { name: "Register For This Event" }).click();
     await page.getByRole("button", { name: "Add To My Calendar" }).click();
@@ -69,6 +70,7 @@ test("Testing if you can update seats to a negative value", async ({
         .locator("tr", { hasText: testName })
         .getByRole("link", { name: "Edit Seats" })
         .click();
+    await expect(page).toHaveURL(/events\/registrations/);
     await page.getByRole("spinbutton", { name: "Seat Count" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).fill("-1");
     await page.getByRole("button", { name: "Save Seat Changes" }).click();
@@ -80,7 +82,7 @@ test("Testing if you can update seats to a negative value", async ({
     // Log back in as admin and delete the event
     await loginAsAdmin(page);
     await page
-        .getByRole("row", { name: `${testName} April 30,` })
+        .getByRole("row", { name: testName })
         .getByRole("button")
         .click();
     await expect(page.locator("section")).toContainText(
@@ -102,7 +104,7 @@ test("Testing if you can update seats to an amount that exceeds max seat amount"
     // Check if registration works
     await page.goto("/events");
     await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
+        .getByRole("link", { name: testName })
         .click();
     await page.getByRole("link", { name: "Register For This Event" }).click();
     await page.getByRole("button", { name: "Add To My Calendar" }).click();
@@ -115,6 +117,7 @@ test("Testing if you can update seats to an amount that exceeds max seat amount"
         .locator("tr", { hasText: testName })
         .getByRole("link", { name: "Edit Seats" })
         .click();
+    await expect(page).toHaveURL(/events\/registrations/);
     await page.getByRole("spinbutton", { name: "Seat Count" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).fill("11");
     await page.getByRole("button", { name: "Save Seat Changes" }).click();
@@ -126,7 +129,7 @@ test("Testing if you can update seats to an amount that exceeds max seat amount"
     // Log back in as admin and delete the event
     await loginAsAdmin(page);
     await page
-        .getByRole("row", { name: `${testName} April 30,` })
+        .getByRole("row", { name: testName })
         .getByRole("button")
         .click();
     await expect(page.locator("section")).toContainText(
@@ -148,7 +151,7 @@ test("Testing if you can update seats to a valid amount of 5", async ({
     // Check if registration works
     await page.goto("/events");
     await page
-        .getByRole("link", { name: `Test April 30, 2026 ${testName} Test` })
+        .getByRole("link", { name: testName })
         .click();
     await page.getByRole("link", { name: "Register For This Event" }).click();
     await page.getByRole("button", { name: "Add To My Calendar" }).click();
@@ -161,6 +164,7 @@ test("Testing if you can update seats to a valid amount of 5", async ({
         .locator("tr", { hasText: testName })
         .getByRole("link", { name: "Edit Seats" })
         .click();
+    await expect(page).toHaveURL(/events\/registrations/);
     await page.getByRole("spinbutton", { name: "Seat Count" }).click();
     await page.getByRole("spinbutton", { name: "Seat Count" }).fill("5");
     await page.getByRole("button", { name: "Save Seat Changes" }).click();
@@ -171,7 +175,7 @@ test("Testing if you can update seats to a valid amount of 5", async ({
     // Log back in as admin and delete the event
     await loginAsAdmin(page);
     await page
-        .getByRole("row", { name: `${testName} April 30,` })
+        .getByRole("row", { name: testName })
         .getByRole("button")
         .click();
     await expect(page.locator("section")).toContainText(

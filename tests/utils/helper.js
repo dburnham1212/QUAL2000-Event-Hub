@@ -68,7 +68,7 @@ const createTestEvent = async (page) => {
     await page.getByRole("spinbutton", { name: "Available Slots" }).fill("10");
     await page.getByRole("button", { name: "Create Event" }).click();
     await expect(page.locator("section")).toContainText(
-        "Event created successfully",
+        "Event created successfully.",
     );
     return newEventName;
 };
