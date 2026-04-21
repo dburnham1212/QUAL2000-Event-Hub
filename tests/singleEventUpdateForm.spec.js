@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { createTestEvent, loginAsAdmin, loginAsUser } from "./utils/helper";
+import { createTestEvent, loginAsAdmin, loginAsUser, logoutOfAdmin } from "./utils/helper";
 
 test('Testing if clicking "Back To My Events" button returns you to event page successfully', async ({
     page,
@@ -7,6 +7,7 @@ test('Testing if clicking "Back To My Events" button returns you to event page s
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -47,6 +48,7 @@ test("Testing if you can update seats to a negative value", async ({
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -92,6 +94,7 @@ test("Testing if you can update seats to an amount that exceeds max seat amount"
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -137,6 +140,7 @@ test("Testing if you can update seats to a valid amount of 5", async ({
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);

@@ -23,7 +23,6 @@ test('Clicking on delete event successfully deletes the event', async ({
     page,
 }) => {
     const testName = await createTestEvent(page);
-    await loginAsAdmin(page); 
     await expect(page.locator('tr', { hasText: testName })).toBeVisible();
     await page.locator('tr', { hasText: testName }).getByRole('button', { name: 'Delete' }).click();
     await expect(page.locator("section")).toContainText(

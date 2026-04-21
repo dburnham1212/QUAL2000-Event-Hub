@@ -12,6 +12,13 @@ const loginAsAdmin = async (page) => {
     await expect(page.locator("section")).toContainText("Admin dashboard");
 };
 
+const logoutOfAdmin = async (page) => {
+    await page.goto("/admin/events");
+    await page.getByRole("button", { name: "Log Out" }).click();
+    await page.getByRole("link", { name: "Return To Public Site" }).click();
+}
+
+
 const loginAsUser = async (page) => {
     await page.goto("/login");
     await page.getByRole("textbox", { name: "Email Address" }).click();
@@ -60,13 +67,13 @@ const createTestEvent = async (page) => {
     await page.getByRole("spinbutton", { name: "Available Slots" }).click();
     await page.getByRole("spinbutton", { name: "Available Slots" }).fill("10");
     await page.getByRole("button", { name: "Create Event" }).click();
-    await page.getByRole("button", { name: "Log Out" }).click();
-    await page.getByRole("link", { name: "Return To Public Site" }).click();
     return newEventName;
 };
 
+
 module.exports = {
     loginAsAdmin,
+    logoutOfAdmin,
     loginAsUser,
     loginAsSecondaryUser,
     createTestEvent,

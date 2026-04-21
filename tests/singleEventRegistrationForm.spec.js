@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { createTestEvent, loginAsAdmin, loginAsUser } from "./utils/helper";
+import { createTestEvent, loginAsAdmin, loginAsUser, logoutOfAdmin } from "./utils/helper";
 
 test('Testing if clicking "Add To My Calendar" button adds the event successfully', async ({
     page,
@@ -7,6 +7,7 @@ test('Testing if clicking "Add To My Calendar" button adds the event successfull
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -52,6 +53,7 @@ test('Testing if clicking "Update My Seats" and updating seat count updates the 
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -84,6 +86,7 @@ test("Testing if you can set seats to a negative value", async ({ page }) => {
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
@@ -120,6 +123,7 @@ test("Testing if you can set seats to an amount that exceeds max seat amount", a
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);

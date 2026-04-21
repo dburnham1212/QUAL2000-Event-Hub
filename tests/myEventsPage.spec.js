@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginAsUser, loginAsAdmin, createTestEvent } from './utils/helper';
+import { loginAsUser, loginAsAdmin, createTestEvent, logoutOfAdmin } from './utils/helper';
 
 // ============ My Events Page Testing ============
 test('Testing if clicking "Browse More Events" button takes you to the public events directory', async ({ page }) => {
@@ -23,6 +23,7 @@ test('Testing if clicking on "Browse Events" button when events list is empty', 
 test('Testing if clicking on an added event takes you to the Single event details page', async ({ page }) => {
   await loginAsAdmin(page);
   const testEventName = await createTestEvent(page);
+  await logoutOfAdmin(page);
 
   await loginAsUser(page);
   await page.goto("/events");
@@ -51,6 +52,7 @@ test('Testing if clicking on an added event takes you to the Single event detail
 test('Testing if clicking "Edit seats" on an added event takes you to the Update seats page', async ({ page }) => {
   await loginAsAdmin(page);
   const testEventName = await createTestEvent(page);
+  await logoutOfAdmin(page);
 
   await loginAsUser(page);
   await page.goto("/events");
@@ -79,6 +81,7 @@ test('Testing if clicking "Edit seats" on an added event takes you to the Update
 test('Testing if clicking "Remove Event" removes the registration from the calendar', async ({ page }) => {
   await loginAsAdmin(page);
   const testEventName = await createTestEvent(page);
+  await logoutOfAdmin(page);
 
   await loginAsUser(page);
   await page.goto("/events");

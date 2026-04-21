@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { getBaseURL } from './utils/helper';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/admin/login');

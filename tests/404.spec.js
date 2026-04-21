@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 // ============ 404 testing ============
 test('Testing if typing an invalid location returns the 404 page', async ({ page }) => {
   await page.goto('/abcdef');
-  await expect(page.locator('span')).toContainText('404 page');
+  await expect(page.getByText('404 page')).toBeVisible();
 });
 
 test('Testing if typing an invalid event id returns the 404 page', async ({ page }) => {

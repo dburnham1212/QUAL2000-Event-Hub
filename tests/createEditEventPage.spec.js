@@ -13,8 +13,8 @@ test('Testing "Back to Dashboard" button while logged in as admin', async ({
 test("Testing if you can create new event logged in as admin", async ({
     page,
 }) => {
-    const testEventName = `Fun Function ${Date.now()}`
     await loginAsAdmin(page);
+    const testEventName = `Fun Function ${Date.now()}`
     await page.goto("/admin/events/new");
     await page.getByRole("textbox", { name: "Event Title" }).click();
     await page

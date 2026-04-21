@@ -4,6 +4,7 @@ import {
     loginAsUser,
     loginAsSecondaryUser,
     createTestEvent,
+    logoutOfAdmin,
 } from "./utils/helper";
 
 // ============ Events Page Testing ============
@@ -74,6 +75,7 @@ test("Testing to see if you can register to a full event", async ({ page }) => {
     // Login as admin and create test event
     await loginAsAdmin(page);
     const testName = await createTestEvent(page);
+    await logoutOfAdmin(page);
 
     // Login as user so we can register
     await loginAsUser(page);
